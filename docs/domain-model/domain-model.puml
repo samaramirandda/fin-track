@@ -1,0 +1,55 @@
+@startuml
+
+title Domain Model
+
+class Transaction {
+    + id
+    + description
+    + money
+    + category
+    + transactionType
+    + transactionDate
+    + createdAt
+    + updatedAt
+}
+
+enum TransactionType {
+    + income
+    + expense
+}
+
+class Category {
+    + id
+    + name
+    + applicableTransactionType
+}
+
+class User {
+    + id
+    + name
+    + preferredCurrency
+}
+
+class FinancialGoal {
+    + id
+    + name
+    + targetAmount
+    + targetDate
+    + currentAmount
+    + createdAt
+    + updatedAt
+    + status
+}
+
+enum GoalStatus{
+    + active
+    + completed
+    + cancelled
+}
+
+User -> Transaction : "1..*"
+User -> FinancialGoal : "1..*"
+Transaction -> TransactionType : "1"
+Transaction -> Category : "*..1"
+
+@enduml
